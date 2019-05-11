@@ -13,7 +13,7 @@
     <style>
         html {
           font-family: 'Roboto';
-          background-color: #fafafa;
+          background-color: #eeeeee;
         }
         body {
           margin: 0;
@@ -29,7 +29,6 @@
           flex-direction: row;
         }
         #root > div {
-          min-height: 100vh;
           display: flex;
           flex-direction: column;
           flex-grow: 1;

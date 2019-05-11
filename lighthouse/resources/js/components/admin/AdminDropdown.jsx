@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Button,
+  IconButton,
   Popper,
   Grow,
   MenuList,
@@ -8,6 +8,7 @@ import {
   ClickAwayListener,
   Paper
 } from '@material-ui/core';
+import { AccountCircle } from '@material-ui/icons';
 
 export default class AdminDropdown extends Component {
   state = {
@@ -31,17 +32,16 @@ export default class AdminDropdown extends Component {
 
     return (
       <div>
-        <Button
-          style={{ color: '#fff' }}
+        <IconButton
+          color="inherit"
           buttonRef={node => {
             this.anchorEl = node;
           }}
           aria-owns={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
-          onClick={this.handleToggle}
-        >
-          {this.props.text}
-        </Button>
+          onClick={this.handleToggle}>
+          <AccountCircle />
+        </IconButton>
         <Popper open={open} anchorEl={this.anchorEl} transition disablePortal>
           {({ TransitionProps, placement }) => (
             <Grow
@@ -52,8 +52,6 @@ export default class AdminDropdown extends Component {
               <Paper>
                 <ClickAwayListener onClickAway={this.handleClose}>
                   <MenuList>
-                    <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={this.handleClose}>My account</MenuItem>
                     <MenuItem onClick={this.handleClose}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>

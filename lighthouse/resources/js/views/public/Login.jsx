@@ -77,62 +77,67 @@ export default class Login extends Component {
     } = this.state;
 
     return (
-      <Grid container justify="center" alignItems="center" style={{ flex: '1' }}>
-        <Grid item>
-          {isAuthenticated
-            ? <Redirect to='/admin' />
-            : <Paper style={{
-              margin: '25px',
-              padding: '25px',
-              borderTop: statusBorder
-            }}>
-              <HeaderWrapper>
-                <Typography
-                  variant="h5"
-                  component="h3">
-                  Login
-                </Typography>
-                <LockOutlined />
-              </HeaderWrapper>
-              <form onSubmit={this.onSubmit}>
-                <TextField
-                  label="Email"
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={this.onInputChange}
-                  fullWidth
-                  required
-                  style={{ marginBottom: '20px' }}
-                />
-                <TextField
-                  label="Password"
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={this.onInputChange}
-                  fullWidth
-                  required
-                  style={{ marginBottom: '20px' }}
-                />
-                <FooterWrapper>
-                  <LoadingButton
-                    text={'Login'}
-                    color={'primary'}
-                    type={'submit'}
-                    loading={isLoading}
-                    style={{ flex: '1', justifyContent: 'flex-start' }} />
-                  <Link to="/reset">
-                    <Button>
-                      Forgot password?
-                    </Button>
-                  </Link>
-                </FooterWrapper>
-              </form>
-            </Paper>
-          }
+      <div style={{ height: '100vh' }}>
+        <Grid container justify="center" alignItems="center" style={{ flex: '1', height: '100%' }}>
+          <Grid item>
+            {isAuthenticated
+              ? <Redirect to='/admin' />
+              : <Paper
+                elevation={1}
+                square={true}
+                style={{
+                  margin: '25px',
+                  padding: '25px',
+                  borderTop: statusBorder
+                }}>
+                <HeaderWrapper>
+                  <Typography
+                    variant="h5"
+                    component="h3">
+                    Login
+                  </Typography>
+                  <LockOutlined />
+                </HeaderWrapper>
+                <form onSubmit={this.onSubmit}>
+                  <TextField
+                    label="Email"
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={this.onInputChange}
+                    fullWidth
+                    required
+                    style={{ marginBottom: '20px' }}
+                  />
+                  <TextField
+                    label="Password"
+                    type="password"
+                    name="password"
+                    value={password}
+                    onChange={this.onInputChange}
+                    fullWidth
+                    required
+                    style={{ marginBottom: '20px' }}
+                  />
+                  <FooterWrapper>
+                    <LoadingButton
+                      text={'Login'}
+                      color={'primary'}
+                      type={'submit'}
+                      loading={isLoading}
+                      style={{ flex: '1', justifyContent: 'flex-start' }} />
+                    <Link to="/reset">
+                      <Button>
+                        Forgot password?
+                      </Button>
+                    </Link>
+                  </FooterWrapper>
+                </form>
+              </Paper>
+            }
+          </Grid>
         </Grid>
-      </Grid>
+      </div>
     );
   }
 }
