@@ -26,11 +26,11 @@ const Content = styled.div`
 `;
 
 const View = styled.div`
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-left: 50px;
+  padding-right: 50px;
   padding-top: 25px;
   padding-bottom: 25px;
-  max-width: 1140px;
+  max-width: 1280px;
   margin: auto;
 `;
 

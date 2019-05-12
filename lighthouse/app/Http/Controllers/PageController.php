@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Page;
 use Illuminate\Http\Request;
 use App\Http\Resources\Page as PageResource;
 

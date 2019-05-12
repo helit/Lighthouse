@@ -12,6 +12,14 @@ class PagesTableSeeder extends Seeder
     public function run()
     {
         DB::table('pages')->insert([
+            'slug' => 'start-page',
+            'title' => 'Start Page',
+            'body' => 'This is a generated start page.',
+            'published' => 1,
+            'visibility' => 'public'
+        ]);
+
+        DB::table('pages')->insert([
             'slug' => 'example-page',
             'title' => 'Example Page',
             'body' => 'This is a generated example page.',

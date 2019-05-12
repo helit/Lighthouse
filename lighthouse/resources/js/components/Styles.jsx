@@ -2,18 +2,18 @@ import {
   createMuiTheme
 } from '@material-ui/core/styles';
 import {
-  lightBlue,
-  deepOrange,
+  indigo,
+  pink,
   red
 } from '@material-ui/core/colors';
 
 export const theme = createMuiTheme({
   palette: {
     primary: {
-      main: lightBlue[600]
+      main: indigo[300]
     },
     secondary: {
-      main: deepOrange[500]
+      main: pink[300]
     },
     type: 'light'
   },
@@ -24,8 +24,6 @@ export const theme = createMuiTheme({
     useNextVariants: true,
   }
 });
-
-console.log(theme);
 
 export const color = {
   primary: `${theme.palette.primary.main}`,

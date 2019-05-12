@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -17,5 +18,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('admin'),
             'role' => 'super_user'
         ]);
+
+        factory(App\User::class, 4)->create();
     }
 }
