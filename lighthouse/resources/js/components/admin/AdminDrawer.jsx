@@ -1,59 +1,93 @@
-import React, { Component } from 'react';
+import React, { Component, render } from 'react';
 import {
   Drawer,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider
+  Divider,
+  Icon
 } from '@material-ui/core';
-import {
-  Dashboard,
-  People,
-  Description,
-  Create,
-  Settings
-} from '@material-ui/icons';
+
+const menu = {
+  top: [
+    {
+      text: 'Users',
+      icon: 'people'
+    },
+  ],
+  main: [
+    {
+      text: 'Dashboard',
+      icon: 'dashboard'
+    },
+    {
+      text: 'Pages',
+      icon: 'description'
+    },
+    {
+      text: 'Posts',
+      icon: 'create'
+    },
+    {
+      text: 'Menus',
+      icon: 'clear_all'
+    },
+  ],
+  bottom: [
+    {
+      text: 'Settings',
+      icon: 'settings'
+    },
+  ],
+}
 
 export default class AdminDrawer extends Component {
+  onChangeView = (view) => {
+    this.props.renderView(view);
+  }
+
   render() {
     return (
       <Drawer
         variant="permanent">
         <div style={{ marginTop: 48 }} />
         <List style={{ width: 240 }}>
-          <ListItem button>
-            <ListItemIcon>
-              <People />
-            </ListItemIcon>
-            <ListItemText primary={"Users"}/>
-          </ListItem>
+          {menu.top.map((item, key) => (
+              <ListItem button
+                key={key}
+                onClick={() => this.onChangeView(item.text.toLowerCase())}>
+                <ListItemIcon>
+                  <Icon>{item.icon}</Icon>
+                </ListItemIcon>
+                <ListItemText primary={item.text}/>
+              </ListItem>
+            )
+          )}
           <Divider />
-          <ListItem button>
-            <ListItemIcon>
-              <Dashboard />
-            </ListItemIcon>
-            <ListItemText primary={"Dashboard"}/>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <Description />
-            </ListItemIcon>
-            <ListItemText primary={"Pages"}/>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <Create />
-            </ListItemIcon>
-            <ListItemText primary={"Posts"}/>
-          </ListItem>
+          {menu.main.map((item, key) => (
+              <ListItem button
+                key={key}
+                onClick={() => this.onChangeView(item.text.toLowerCase())}>
+                <ListItemIcon>
+                  <Icon>{item.icon}</Icon>
+                </ListItemIcon>
+                <ListItemText primary={item.text}/>
+              </ListItem>
+            )
+          )}
           <Divider />
-          <ListItem button>
-            <ListItemIcon>
-              <Settings />
-            </ListItemIcon>
-            <ListItemText primary={"Settings"}/>
-          </ListItem>
+          {menu.bottom.map((item, key) => (
+              <ListItem button
+                key={key}
+                onClick={() => this.onChangeView(item.text.toLowerCase())}>
+                <ListItemIcon>
+                  <Icon>{item.icon}</Icon>
+                </ListItemIcon>
+                <ListItemText primary={item.text}/>
+              </ListItem>
+            )
+          )}
         </List>
       </Drawer>
     );

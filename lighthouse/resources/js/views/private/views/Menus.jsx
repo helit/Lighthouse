@@ -3,12 +3,12 @@ import {
   Typography
 } from '@material-ui/core';
 
-export default class Pages extends Component {
+export default class Menus extends Component {
   render() {
     return (
       <div>
         <Typography variant="h5" style={{ marginBottom: '20px' }}>
-          Pages
+          Menus
         </Typography>
       </div>
     );

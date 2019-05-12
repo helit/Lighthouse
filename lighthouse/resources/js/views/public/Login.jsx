@@ -4,7 +4,11 @@ import {
   Paper,
   TextField,
   Button,
-  Typography
+  Typography,
+  FormControl,
+  FormGroup,
+  FormControlLabel,
+  Checkbox
 } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
 import { LockOutlined } from '@material-ui/icons';
@@ -34,13 +38,19 @@ export default class Login extends Component {
       email: '',
       password: '',
       isLoading: false,
-      statusBorder: statusBorder.default,
-      isAuthenticated: false
+      statusBorder: statusBorder.primary,
+      isAuthenticated: false,
+      rememberMe: false
     };
   }
 
   onInputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onCheckboxChange = () => {
+    let checked = !this.state.rememberMe;
+    this.setState({ rememberMe: checked });
   }
 
   onSubmit = (e) => {
@@ -49,7 +59,7 @@ export default class Login extends Component {
 
     this.setState({
       isLoading: true,
-      statusBorder: statusBorder.default
+      statusBorder: statusBorder.primary
     });
 
     axios.post('/api/login', { email, password })
@@ -73,7 +83,8 @@ export default class Login extends Component {
       password,
       isLoading,
       statusBorder,
-      isAuthenticated
+      isAuthenticated,
+      rememberMe
     } = this.state;
 
     return (
@@ -96,29 +107,46 @@ export default class Login extends Component {
                     component="h3">
                     Login
                   </Typography>
-                  <LockOutlined />
+                  <LockOutlined color='primary'/>
                 </HeaderWrapper>
                 <form onSubmit={this.onSubmit}>
-                  <TextField
-                    label="Email"
-                    type="email"
-                    name="email"
-                    value={email}
-                    onChange={this.onInputChange}
-                    fullWidth
-                    required
-                    style={{ marginBottom: '20px' }}
-                  />
-                  <TextField
-                    label="Password"
-                    type="password"
-                    name="password"
-                    value={password}
-                    onChange={this.onInputChange}
-                    fullWidth
-                    required
-                    style={{ marginBottom: '20px' }}
-                  />
+                  <FormControl margin="normal" fullWidth>
+                    <TextField
+                      label="Email"
+                      type="email"
+                      name="email"
+                      value={email}
+                      onChange={this.onInputChange}
+                      fullWidth
+                      required
+                    />
+                  </FormControl>
+                  <FormControl margin="normal" fullWidth>
+                    <TextField
+                      label="Password"
+                      type="password"
+                      name="password"
+                      value={password}
+                      onChange={this.onInputChange}
+                      fullWidth
+                      required
+                    />
+                  </FormControl>
+                  <FormControl margin="normal" fullWidth>
+                    <FormGroup row>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={rememberMe}
+                            onChange={this.onCheckboxChange}
+                            value="rememberMe"
+                            color="primary"
+                          />
+                        }
+                        label="Remember me"
+                      />
+                    </FormGroup>
+                  </FormControl>
                   <FooterWrapper>
                     <LoadingButton
                       text={'Login'}

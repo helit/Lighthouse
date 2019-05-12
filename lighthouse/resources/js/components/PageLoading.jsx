@@ -17,7 +17,7 @@ export default class PageLoading extends Component {
   render() {
     return (
       <Wrapper>
-        <CircularProgress size={100} thickness={5} />
+        <CircularProgress color='secondary' size={100} thickness={5} />
       </Wrapper>
     );
   }

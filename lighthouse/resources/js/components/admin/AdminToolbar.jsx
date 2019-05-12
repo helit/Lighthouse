@@ -12,7 +12,7 @@ export default class AdminToolbar extends Component {
       <AppBar
         position="fixed"
         elevation={1}
-        color="default"
+        color="primary"
         style={{ zIndex: 1201 }}>
         <Toolbar
           variant="dense">
@@ -20,7 +20,7 @@ export default class AdminToolbar extends Component {
             style={{ flexGrow: "1" }}
             variant="h6"
             color="inherit">
-            Admin Toolbar
+            Admin
           </Typography>
           <AdminDropdown />
         </Toolbar>

@@ -1,6 +1,35 @@
+import {
+  createMuiTheme
+} from '@material-ui/core/styles';
+import {
+  lightBlue,
+  deepOrange,
+  red
+} from '@material-ui/core/colors';
+
+export const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: lightBlue[600]
+    },
+    secondary: {
+      main: deepOrange[500]
+    },
+    type: 'light'
+  },
+  status: {
+    danger: red[400]
+  },
+  typography: {
+    useNextVariants: true,
+  }
+});
+
+console.log(theme);
+
 export const color = {
-  default: '#3f51b5',
-  error: '#ff7043',
+  primary: `${theme.palette.primary.main}`,
+  error: `${theme.status.danger}`,
   black: '#19171c',
   darkGrey: '#3f4448',
   white: '#ffffff',
@@ -8,10 +37,6 @@ export const color = {
 }
 
 export const statusBorder = {
-  default: `5px solid ${color.default}`,
-  error: `5px solid ${color.error}`
-}
-
-export const general = {
-  boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12);'
+  primary: `5px solid ${theme.palette.primary.main}`,
+  error: `5px solid ${theme.status.danger}`
 }

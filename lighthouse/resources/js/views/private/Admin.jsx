@@ -8,8 +8,14 @@ import styled from 'styled-components';
 import { statusBorder } from '../../components/Styles';
 import AdminToolbar from '../../components/admin/AdminToolbar';
 import AdminDrawer from '../../components/admin/AdminDrawer';
+
+// Views
+import Users from './views/Users';
 import Dashboard from './views/Dashboard';
 import Pages from './views/Pages';
+import Posts from './views/Posts';
+import Menus from './views/Menus';
+import Settings from './views/Settings';
 
 const Content = styled.div`
   height: 100%;
@@ -17,29 +23,55 @@ const Content = styled.div`
   flex-direction: column;
   background-color: #eeeeee;
   padding-left: 240px;
-  margin-top: 50px;
-  margin-bottom: 50px;
 `;
 
 const View = styled.div`
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
   max-width: 1140px;
   margin: auto;
 `;
 
 export default class Admin extends Component {
   state = {
-    currentView: null,
+    currentView: <Dashboard />,
     viewTitle: 'Dashboard'
   }
 
   renderView = (view) => {
     switch (view) {
+      case 'users':
+        return this.setState({
+          viewTitle: 'Users',
+          currentView: <Users />
+        });
+      case 'dashboard':
+        return this.setState({
+          viewTitle: 'Dashboard',
+          currentView: <Dashboard />
+        });
       case 'pages':
-        return <Pages />;
-      default:
-        return <Dashboard />;
+        return this.setState({
+          viewTitle: 'Pages',
+          currentView: <Pages />
+        });
+      case 'posts':
+        return this.setState({
+          viewTitle: 'Posts',
+          currentView: <Posts />
+        });
+      case 'menus':
+        return this.setState({
+          viewTitle: 'Menus',
+          currentView: <Menus />
+        });
+      case 'settings':
+        return this.setState({
+          viewTitle: 'Settings',
+          currentView: <Settings />
+        });
     }
   }
 
@@ -49,7 +81,7 @@ export default class Admin extends Component {
     return (
       <div>
         <AdminToolbar />
-        <AdminDrawer />
+        <AdminDrawer renderView={this.renderView} />
         <Content>
           <div style={{ marginTop: 48 }} />
           <Grid container spacing={0} style={{ height: '100%' }}>
@@ -61,8 +93,11 @@ export default class Admin extends Component {
                 <Paper
                   elevation={1}
                   square={true}
-                  style={{ padding: '25px', borderTop: statusBorder.default }}>
-                  {this.renderView(currentView)}
+                  style={{
+                    padding: '25px',
+                    borderTop: statusBorder.primary
+                  }}>
+                  {currentView}
                 </Paper>
               </View>
             </Grid>

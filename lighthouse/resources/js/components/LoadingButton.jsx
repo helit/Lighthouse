@@ -24,7 +24,10 @@ export default class LoadingButton extends Component {
           {this.props.text}
         </Button>
         {this.props.loading &&
-          <CircularProgress size={24} style={{ position: 'absolute' }} />}
+          <CircularProgress
+            color='secondary'
+            size={24}
+            style={{ position: 'absolute' }} />}
       </Wrapper>
     );
   }
