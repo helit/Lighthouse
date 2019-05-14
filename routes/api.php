@@ -35,4 +35,18 @@ Route::middleware('auth:api')->group(function () {
     Route::get('pages/{page}', 'PageController@show');
     Route::put('pages/{page}', 'PageController@update');
     Route::delete('pages/{page}', 'PageController@destroy');
+
+    // Posts
+    Route::get('posts', 'PostController@index');
+    Route::post('posts', 'PostController@store');
+    Route::get('posts/{post}', 'PostController@show');
+    Route::put('posts/{post}', 'PostController@update');
+    Route::delete('posts/{post}', 'PostController@destroy');
+
+    // Menus
+    Route::get('menus', 'MenuController@index');
+    Route::post('menus', 'MenuController@store');
+    Route::get('menus/{menu}', 'MenuController@show');
+    Route::put('menus/{menu}', 'MenuController@update');
+    Route::delete('menus/{menu}', 'MenuController@destroy');
 });
