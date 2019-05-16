@@ -17,8 +17,6 @@ const AdminAppBar = withStyles({
   }
 })(AppBar);
 
-console.log(AdminAppBar);
-
 export default class AdminToolbar extends Component {
   render() {
     return (
