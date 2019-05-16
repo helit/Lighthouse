@@ -28,13 +28,17 @@ export const theme = createMuiTheme({
 export const color = {
   primary: `${theme.palette.primary.main}`,
   error: `${theme.status.danger}`,
+  dark: '#424242',
   black: '#19171c',
   darkGrey: '#3f4448',
   white: '#ffffff',
-  background: '#fafafa'
 }
 
 export const statusBorder = {
   primary: `5px solid ${theme.palette.primary.main}`,
   error: `5px solid ${theme.status.danger}`
+}
+
+export const adminToolbar = {
+  margin: '53px',
 }

@@ -5,7 +5,7 @@ import {
   Typography
 } from '@material-ui/core';
 import styled from 'styled-components';
-import { statusBorder } from '../../components/Styles';
+import { statusBorder, adminToolbar } from '../../theme/Styles';
 import AdminToolbar from '../../components/admin/AdminToolbar';
 import AdminDrawer from '../../components/admin/AdminDrawer';
 
@@ -18,20 +18,18 @@ import Menus from './views/Menus';
 import Settings from './views/Settings';
 
 const Content = styled.div`
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #eeeeee;
   padding-left: 240px;
 `;
 
 const View = styled.div`
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  max-width: 1280px;
-  margin: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  max-width: 1140px;
 `;
 
 export default class Admin extends Component {
@@ -83,22 +81,14 @@ export default class Admin extends Component {
         <AdminToolbar />
         <AdminDrawer renderView={this.renderView} />
         <Content>
-          <div style={{ marginTop: 48 }} />
+          <div style={{ marginTop: adminToolbar.margin }} />
           <Grid container spacing={0} style={{ height: '100%' }}>
             <Grid item xs={12}>
               <View>
                 <Typography variant="h4" style={{ marginBottom: '20px' }}>
                   {viewTitle}
                 </Typography>
-                <Paper
-                  elevation={1}
-                  square={true}
-                  style={{
-                    padding: '25px',
-                    borderTop: statusBorder.primary
-                  }}>
-                  {currentView}
-                </Paper>
+                {currentView}
               </View>
             </Grid>
           </Grid>

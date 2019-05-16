@@ -8,6 +8,8 @@ import {
   Divider,
   Icon
 } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import { color, adminToolbar } from '../../theme/Styles';
 
 const menu = {
   top: [
@@ -51,7 +53,7 @@ export default class AdminDrawer extends Component {
     return (
       <Drawer
         variant="permanent">
-        <div style={{ marginTop: 48 }} />
+        <div style={{ marginTop: adminToolbar.margin }} />
         <List style={{ width: 240 }}>
           {menu.top.map((item, key) => (
               <ListItem button

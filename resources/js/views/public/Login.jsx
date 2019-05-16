@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import LoadingButton from '../../components/LoadingButton';
 import styled from 'styled-components';
-import { statusBorder } from '../../components/Styles';
+import { statusBorder } from '../../theme/Styles';
 
 const HeaderWrapper = styled.div`
   display: flex;

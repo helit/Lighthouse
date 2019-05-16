@@ -118,18 +118,18 @@ const toolbarStyles = theme => ({
   highlight:
     theme.palette.type === 'light'
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+          color: theme.palette.primary.main,
+          backgroundColor: lighten(theme.palette.primary.light, 0.85),
         }
       : {
           color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
+          backgroundColor: theme.palette.primary.dark,
         },
   spacer: {
     flex: '1 1 100%',
   },
   actions: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
   },
   title: {
     flex: '0 0 auto',
@@ -285,7 +285,7 @@ class EnhancedTable extends React.Component {
     const rows = this.createRows(data);
 
     return (
-      <Paper square={true} elevation={0}>
+      <Paper square={true} elevation={4}>
         <EnhancedTableToolbar title={title} numSelected={selected.length} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">

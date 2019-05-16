@@ -67,8 +67,15 @@ export default class Users extends Component {
     return (
       <div>
         {isLoading
-          ? <AdminPageLoader />
-          : <EnhancedTable title={'Users'} data={data} />
+          ?
+            <AdminPageLoader />
+          :
+            <div>
+              <Typography paragraph variant="body1">
+                List of all users.
+              </Typography>
+              <EnhancedTable title={'Users'} data={data} />
+            </div>
         }
       </div>
     );

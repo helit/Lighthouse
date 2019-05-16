@@ -5,15 +5,26 @@ import {
   Typography
 } from '@material-ui/core';
 import AdminDropdown from './AdminDropdown';
+import { color, statusBorder } from '../../theme/Styles';
+import { withStyles } from '@material-ui/core/styles';
+
+const AdminAppBar = withStyles({
+  root: {
+    zIndex: 1201,
+    backgroundColor: color.dark,
+    color: color.white,
+    borderBottom: statusBorder.primary
+  }
+})(AppBar);
+
+console.log(AdminAppBar);
 
 export default class AdminToolbar extends Component {
   render() {
     return (
-      <AppBar
+      <AdminAppBar
         position="fixed"
-        elevation={1}
-        color="primary"
-        style={{ zIndex: 1201 }}>
+        elevation={0}>
         <Toolbar
           variant="dense">
           <Typography
@@ -24,7 +35,7 @@ export default class AdminToolbar extends Component {
           </Typography>
           <AdminDropdown />
         </Toolbar>
-      </AppBar>
+      </AdminAppBar>
     );
   }
 }

@@ -7,7 +7,7 @@ import {
   withStyles
 } from '@material-ui/core/styles';
 
-import { theme } from './components/Styles';
+import { theme } from './theme/Styles';
 
 import Home from './views/public/Home';
 import Login from './views/public/Login';

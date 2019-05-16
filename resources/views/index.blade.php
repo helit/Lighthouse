@@ -10,30 +10,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
 
     <title>Lighthouse</title>
-    <style>
-        html {
-          font-family: 'Roboto';
-          background-color: #eeeeee;
-        }
-        body {
-          margin: 0;
-        }
-        * {
-          box-sizing: border-box;
-        }
-        a {
-          text-decoration: none;
-        }
-        #root {
-          display: flex;
-          flex-direction: row;
-        }
-        #root > div {
-          display: flex;
-          flex-direction: column;
-          flex-grow: 1;
-        }
-    </style>
   </head>
   <body>
     <div id="root"></div>
