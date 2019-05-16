@@ -14,12 +14,10 @@ import {
   Paper,
   Checkbox,
   IconButton,
-  Tooltip
+  Tooltip,
+  Icon
 } from '@material-ui/core';
-
 import { withStyles } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
 function desc(a, b, orderBy) {
@@ -96,6 +94,7 @@ class EnhancedTableHead extends React.Component {
             ),
             this,
           )}
+          <TableCell />
         </TableRow>
       </TableHead>
     );
@@ -161,13 +160,13 @@ let EnhancedTableToolbar = props => {
         {numSelected > 0 ? (
           <Tooltip title="Delete">
             <IconButton aria-label="Delete">
-              <DeleteIcon />
+              <Icon>delete</Icon>
             </IconButton>
           </Tooltip>
         ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterListIcon />
+          <Tooltip title="Add User">
+            <IconButton color="primary" aria-label="Add User">
+              <Icon>add_circle</Icon>
             </IconButton>
           </Tooltip>
         )}
@@ -205,10 +204,6 @@ class EnhancedTable extends React.Component {
     data: (this.props.data.data)
       ? this.props.data.data
       : [],
-    page: 0,
-    rowsPerPage: (this.props.data.rowsPerPage)
-      ? this.props.data.rowsPerPage
-      : 0,
   };
 
   handleRequestSort = (event, property) => {
@@ -251,14 +246,6 @@ class EnhancedTable extends React.Component {
     this.setState({ selected: newSelected });
   };
 
-  handleChangePage = (event, page) => {
-    this.setState({ page });
-  };
-
-  handleChangeRowsPerPage = event => {
-    this.setState({ rowsPerPage: event.target.value });
-  };
-
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   createRows = (data) => {
@@ -280,8 +267,7 @@ class EnhancedTable extends React.Component {
 
   render() {
     const { classes, title } = this.props;
-    const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+    const { data, order, orderBy, selected } = this.state;
     const rows = this.createRows(data);
 
     return (
@@ -300,51 +286,38 @@ class EnhancedTable extends React.Component {
             />
             <TableBody>
               {stableSort(data, getSorting(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
                   const isSelected = this.isSelected(n.id);
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, n.id)}
-                      role="checkbox"
-                      aria-checked={isSelected}
-                      tabIndex={-1}
-                      key={n.id}
                       selected={isSelected}
                     >
-                      <TableCell padding="checkbox">
+                      <TableCell
+                        onClick={event => this.handleClick(event, n.id)}
+                        role="checkbox"
+                        aria-checked={isSelected}
+                        tabIndex={-1}
+                        key={n.id}
+                        padding="checkbox">
                         <Checkbox checked={isSelected} />
                       </TableCell>
                       {rows[n.id].map((value, key) => (
                         <TableCell key={key}>{value}</TableCell>
                       ))}
+                      <TableCell>
+                        <Tooltip title="User Settings">
+                          <IconButton aria-label="User Settings">
+                            <Icon>settings</Icon>
+                          </IconButton>
+                        </Tooltip>
+                      </TableCell>
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 49 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
             </TableBody>
           </Table>
         </div>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={data.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          backIconButtonProps={{
-            'aria-label': 'Previous Page',
-          }}
-          nextIconButtonProps={{
-            'aria-label': 'Next Page',
-          }}
-          onChangePage={this.handleChangePage}
-          onChangeRowsPerPage={this.handleChangeRowsPerPage}
-        />
       </Paper>
     );
   }

@@ -16,9 +16,8 @@ let data = {
   ],
   order: 'asc',
   orderBy: 'id',
-  selected: [3],
+  selected: [],
   data: [],
-  rowsPerPage: 5
 }
 
 export default class Users extends Component {
