@@ -6,7 +6,6 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TablePagination,
   TableRow,
   TableSortLabel,
   Toolbar,
