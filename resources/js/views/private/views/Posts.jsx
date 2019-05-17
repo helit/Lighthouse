@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import api from '../../../services/api';
 import {
   Typography,
   List,
@@ -24,11 +24,7 @@ export default class Posts extends Component {
     let posts = [];
     this.setState({ isLoading: true })
 
-    axios.get('/api/posts', {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem('token'),
-      }
-    })
+    api.get('/posts')
       .then(response => {
         const data = response.data.data;
         data.map((post, index) => {

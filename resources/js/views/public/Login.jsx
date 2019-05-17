@@ -13,7 +13,8 @@ import {
 import { Redirect } from 'react-router-dom';
 import { LockOutlined } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../services/api';
+import TokenUtils from '../../utils/TokenUtils';
 import LoadingButton from '../../components/LoadingButton';
 import styled from 'styled-components';
 import { statusBorder } from '../../theme/Styles';
@@ -62,17 +63,15 @@ export default class Login extends Component {
       statusBorder: statusBorder.primary
     });
 
-    axios.post('/api/login', { email, password })
+    api.post('/login', { email, password })
       .then(response => {
         this.setState({ isAuthenticated: true });
-        localStorage.setItem('token', response.data.token);
+        TokenUtils.setToken(response.data.token);
       })
       .catch(error => {
         this.setState({ statusBorder: statusBorder.error });
-        localStorage.removeItem('token');
+        // localStorage.removeItem('token');
         console.log(error);
-      })
-      .then(() => {
         this.setState({ isLoading: false });
       });
   }
@@ -89,14 +88,15 @@ export default class Login extends Component {
 
     return (
       <div style={{ height: '100vh' }}>
-        <Grid container justify="center" alignItems="center" style={{ flex: '1', height: '100%' }}>
-          <Grid item>
+        <Grid container justify="center" alignItems="center">
+          <Grid item style={{ marginTop: '50px' }}>
             {isAuthenticated
               ? <Redirect to='/admin' />
               : <Paper
                 elevation={1}
                 square={true}
                 style={{
+                  maxWidth: '400px',
                   margin: '25px',
                   padding: '25px',
                   borderTop: statusBorder

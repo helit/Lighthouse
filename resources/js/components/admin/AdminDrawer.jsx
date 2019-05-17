@@ -12,12 +12,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { color, adminToolbar } from '../../theme/Styles';
 
 const menu = {
-  top: [
-    {
-      text: 'Users',
-      icon: 'people'
-    },
-  ],
   main: [
     {
       text: 'Dashboard',
@@ -38,6 +32,10 @@ const menu = {
   ],
   bottom: [
     {
+      text: 'Users',
+      icon: 'people'
+    },
+    {
       text: 'Settings',
       icon: 'settings'
     },
@@ -55,17 +53,6 @@ export default class AdminDrawer extends Component {
         variant="permanent">
         <div style={{ marginTop: adminToolbar.margin }} />
         <List style={{ width: 240 }}>
-          {menu.top.map((item, key) => (
-              <ListItem button
-                key={key}
-                onClick={() => this.onChangeView(item.text.toLowerCase())}>
-                <ListItemIcon>
-                  <Icon>{item.icon}</Icon>
-                </ListItemIcon>
-                <ListItemText primary={item.text}/>
-              </ListItem>
-            )
-          )}
           <Divider />
           {menu.main.map((item, key) => (
               <ListItem button

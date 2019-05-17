@@ -4,6 +4,7 @@ import api from '../services/api';
 import PageLoading from '../components/PageLoading';
 
 export default class PrivateRoute extends Component {
+
   constructor() {
     super();
     this.state = {
@@ -14,7 +15,7 @@ export default class PrivateRoute extends Component {
   componentDidMount() {
     api.post('/user')
       .then(() => {
-        this.setState({ isAuthenticated: true });
+          this.setState({ isAuthenticated: true });
       })
       .catch(error => {
         console.log(error);

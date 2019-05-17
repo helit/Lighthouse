@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import api from '../../../services/api';
 import {
   Typography,
-  CircularProgress
 } from '@material-ui/core';
 import EnhancedTable from '../../../components/EnhancedTable';
 import AdminPageLoader from '../../../components/AdminPageLoader';
@@ -30,11 +29,7 @@ export default class Users extends Component {
     let users = [];
     this.setState({ isLoading: true })
 
-    axios.get('/api/users', {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem('token'),
-      }
-    })
+    api.get('/users')
       .then(response => {
         const data = response.data.data;
         data.map((user, index) => {

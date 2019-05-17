@@ -290,6 +290,7 @@ class EnhancedTable extends React.Component {
                   const isSelected = this.isSelected(n.id);
                   return (
                     <TableRow
+                      key={n.id}
                       hover
                       selected={isSelected}
                     >
@@ -298,7 +299,6 @@ class EnhancedTable extends React.Component {
                         role="checkbox"
                         aria-checked={isSelected}
                         tabIndex={-1}
-                        key={n.id}
                         padding="checkbox">
                         <Checkbox checked={isSelected} />
                       </TableCell>

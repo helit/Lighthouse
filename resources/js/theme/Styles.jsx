@@ -10,10 +10,10 @@ import {
 export const theme = createMuiTheme({
   palette: {
     primary: {
-      main: indigo[300]
+      main: indigo[500]
     },
     secondary: {
-      main: pink[300]
+      main: pink[500]
     },
     type: 'light'
   },

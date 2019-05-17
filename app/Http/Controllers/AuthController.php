@@ -31,7 +31,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (!$token = $this->guard()->attempt($credentials)) {
-            return response()->json([], 401);
+            return response()->json(['error' => 'Incorrect email/password'], 401);
             // return $this->respondWithToken($token);
         }
 
@@ -72,7 +72,15 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken($this->guard()->refresh());
+        try {
+            $newToken = auth()->refresh();
+        } catch(\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['error' => $e->getMessage()], 401);
+        }
+
+        return response()->json(['token' => $newToken]);
+
+        // return $this->respondWithToken($this->guard()->refresh());
     }
 
     /**

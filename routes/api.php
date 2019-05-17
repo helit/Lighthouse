@@ -15,10 +15,10 @@ use Illuminate\Http\Request;
 
 Route::middleware('api')->group(function() {
     Route::post('login', 'AuthController@login');
-    Route::post('refresh', 'AuthController@refresh');
 });
 
 Route::middleware('auth:api')->group(function () {
+    Route::post('refresh', 'AuthController@refresh');
     Route::post('logout', 'AuthController@logout');
     Route::post('user', 'AuthController@user');
 
