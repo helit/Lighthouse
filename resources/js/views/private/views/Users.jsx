@@ -60,17 +60,16 @@ export default class Users extends Component {
     const { isLoading } = this.state;
     return (
       <div>
-        {isLoading
-          ?
-            <AdminPageLoader />
-          :
-            <div>
-              <Typography paragraph variant="body1">
-                List of all users.
-              </Typography>
-              <EnhancedTable title={'Users'} data={data} />
-            </div>
-        }
+        {isLoading ? (
+          <AdminPageLoader />
+        ) : (
+          <div>
+            <Typography paragraph variant="body1">
+              List of all users.
+            </Typography>
+            <EnhancedTable title={'Users'} tooltipTerm={'User'} data={data} />
+          </div>
+        )}
       </div>
     );
   }

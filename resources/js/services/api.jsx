@@ -34,17 +34,13 @@ api.interceptors.response.use(
   },
   error => {
     const errorResponse = error.response
-    if (isTokenExpiredError(errorResponse)) {
+    if (error.response.status === 401) {
       return resetTokenAndReattemptRequest(error)
     }
     // If the error is due to other reasons, we just throw it back to axios
     return Promise.reject(error)
   }
 );
-
-function isTokenExpiredError(errorResponse) {
-  // Your own logic to determine if the error is due to JWT token expired returns a boolean value
-}
 
 async function resetTokenAndReattemptRequest(error) {
   try {

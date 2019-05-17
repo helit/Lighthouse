@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import api from '../../../services/api';
-import {
-  Typography,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Avatar,
-  Icon,
-  ListItemSecondaryAction,
-  IconButton,
-  Paper
-} from '@material-ui/core';
+import EnhancedTable from '../../../components/EnhancedTable';
 import AdminPageLoader from '../../../components/AdminPageLoader';
+
+let data = {
+  rows: [
+    { id: 'postId', numeric: false, disablePadding: false, label: 'Id' },
+    { id: 'title', numeric: false, disablePadding: false, label: 'Title' },
+    { id: 'slug', numeric: false, disablePadding: false, label: 'Slug' },
+    { id: 'published', numeric: false, disablePadding: false, label: 'Published' },
+    { id: 'visibility', numeric: false, disablePadding: false, label: 'Visibility' },
+  ],
+  order: 'asc',
+  orderBy: 'id',
+  selected: [],
+  data: [],
+}
 
 export default class Posts extends Component {
   state = {
@@ -29,10 +32,10 @@ export default class Posts extends Component {
         const data = response.data.data;
         data.map((post, index) => {
           posts.push({
-            id: post.id,
-            slug: post.slug,
+            id: index,
+            postId: post.id,
             title: post.title,
-            body: post.body,
+            slug: post.slug,
             published: post.published,
             visibility: post.visibility
           });
@@ -47,44 +50,23 @@ export default class Posts extends Component {
           posts: posts
         });
       });
+
+    return posts;
   }
 
   componentDidMount() {
-    this.getPosts();
+    data.data = this.getPosts();
   }
 
   render() {
-    const { isLoading, posts } = this.state;
+    const { isLoading } = this.state;
     return (
       <div>
-        {isLoading
-          ?
-            <AdminPageLoader />
-          :
-          <div>
-            <Paper square={true} elevation={4}>
-              <List>
-              {posts.map((post, key) => (
-                <ListItem key={key} button>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <Icon>description</Icon>
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={post.title}
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton aria-label="Delete">
-                      <Icon>delete</Icon>
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
-              </List>
-            </Paper>
-          </div>
-        }
+        {isLoading ? (
+          <AdminPageLoader />
+        ) : (
+          <EnhancedTable title={'Posts'} tooltipTerm={'Post'} data={data} />
+        )}
       </div>
     );
   }

@@ -32,14 +32,11 @@ class AuthController extends Controller
 
         if (!$token = $this->guard()->attempt($credentials)) {
             return response()->json(['error' => 'Incorrect email/password'], 401);
-            // return $this->respondWithToken($token);
         }
 
         $user = new UserResource($this->guard()->user());
 
         return $user->additional(compact('token'));
-
-        // return response()->json(['error' => 'Unauthorized'], 401);
     }
 
     /**

@@ -136,7 +136,7 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes, title } = props;
+  const { numSelected, classes, title, tooltipTerm } = props;
 
   return (
     <Toolbar
@@ -158,14 +158,14 @@ let EnhancedTableToolbar = props => {
       <div className={classes.spacer} />
       <div className={classes.actions}>
         {numSelected > 0 ? (
-          <Tooltip title="Delete">
-            <IconButton aria-label="Delete">
+          <Tooltip title="Delete Selected">
+            <IconButton aria-label="Delete Selected">
               <Icon>delete</Icon>
             </IconButton>
           </Tooltip>
         ) : (
-          <Tooltip title="Add User">
-            <IconButton color="primary" aria-label="Add User">
+          <Tooltip title={`Add ${tooltipTerm}`}>
+            <IconButton color="primary" aria-label={`Add ${tooltipTerm}`}>
               <Icon>add_circle</Icon>
             </IconButton>
           </Tooltip>
@@ -266,13 +266,16 @@ class EnhancedTable extends React.Component {
   }
 
   render() {
-    const { classes, title } = this.props;
+    const { classes, title, tooltipTerm } = this.props;
     const { data, order, orderBy, selected } = this.state;
     const rows = this.createRows(data);
 
     return (
       <Paper square={true} elevation={4}>
-        <EnhancedTableToolbar title={title} numSelected={selected.length} />
+        <EnhancedTableToolbar
+          title={title}
+          tooltipTerm={tooltipTerm}
+          numSelected={selected.length} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
@@ -306,8 +309,8 @@ class EnhancedTable extends React.Component {
                         <TableCell key={key}>{value}</TableCell>
                       ))}
                       <TableCell>
-                        <Tooltip title="User Settings">
-                          <IconButton aria-label="User Settings">
+                        <Tooltip title={`${tooltipTerm} Settings`}>
+                          <IconButton aria-label={`${tooltipTerm} Settings`}>
                             <Icon>settings</Icon>
                           </IconButton>
                         </Tooltip>
