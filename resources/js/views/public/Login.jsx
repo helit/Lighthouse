@@ -8,21 +8,22 @@ import {
   FormControl,
   FormGroup,
   FormControlLabel,
-  Checkbox
+  Checkbox,
+  Icon,
+  Avatar
 } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
-import { LockOutlined } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import TokenUtils from '../../utils/TokenUtils';
 import LoadingButton from '../../components/LoadingButton';
 import styled from 'styled-components';
-import { statusBorder } from '../../theme/Styles';
+import { color, statusBorder } from '../../theme/Styles';
 
 const HeaderWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const FooterWrapper = styled.div`
@@ -39,7 +40,7 @@ export default class Login extends Component {
       email: '',
       password: '',
       isLoading: false,
-      statusBorder: statusBorder.primary,
+      badCredentials: false,
       isAuthenticated: false,
       rememberMe: false
     };
@@ -60,7 +61,7 @@ export default class Login extends Component {
 
     this.setState({
       isLoading: true,
-      statusBorder: statusBorder.primary
+      badCredentials: false
     });
 
     api.post('/login', { email, password })
@@ -69,7 +70,7 @@ export default class Login extends Component {
         TokenUtils.setToken(response.data.token);
       })
       .catch(error => {
-        this.setState({ statusBorder: statusBorder.error });
+        this.setState({ badCredentials: true });
         // localStorage.removeItem('token');
         console.log(error);
         this.setState({ isLoading: false });
@@ -81,7 +82,7 @@ export default class Login extends Component {
       email,
       password,
       isLoading,
-      statusBorder,
+      badCredentials,
       isAuthenticated,
       rememberMe
     } = this.state;
@@ -99,15 +100,26 @@ export default class Login extends Component {
                   maxWidth: '400px',
                   margin: '25px',
                   padding: '25px',
-                  borderTop: statusBorder
+                  borderTop: badCredentials
+                    ? statusBorder.error
+                    : statusBorder.primary
                 }}>
                 <HeaderWrapper>
+                  <Avatar
+                    style={{
+                      color: '#fff',
+                      backgroundColor: badCredentials
+                        ? color.error
+                        : color.primary,
+                      marginBottom: '10px',
+                    }}>
+                    <Icon>vpn_key</Icon>
+                  </Avatar>
                   <Typography
                     variant="h5"
                     component="h3">
                     Login
                   </Typography>
-                  <LockOutlined color='primary'/>
                 </HeaderWrapper>
                 <form onSubmit={this.onSubmit}>
                   <FormControl margin="normal" fullWidth>
