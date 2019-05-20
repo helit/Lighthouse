@@ -8,10 +8,10 @@ import AdminPageLoader from '../../../components/AdminPageLoader';
 
 let data = {
   rows: [
-    { id: 'userid', numeric: false, disablePadding: false, label: 'Id' },
-    { id: 'name', numeric: false, disablePadding: false, label: 'Name' },
-    { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
-    { id: 'role', numeric: false, disablePadding: false, label: 'Role' },
+    { id: 'userid', disablePadding: false, label: 'Id' },
+    { id: 'name', disablePadding: false, label: 'Name' },
+    { id: 'email', disablePadding: false, label: 'Email' },
+    { id: 'role', disablePadding: false, label: 'Role' },
   ],
   order: 'asc',
   orderBy: 'id',

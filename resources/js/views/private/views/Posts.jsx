@@ -5,11 +5,11 @@ import AdminPageLoader from '../../../components/AdminPageLoader';
 
 let data = {
   rows: [
-    { id: 'postId', numeric: false, disablePadding: false, label: 'Id' },
-    { id: 'title', numeric: false, disablePadding: false, label: 'Title' },
-    { id: 'slug', numeric: false, disablePadding: false, label: 'Slug' },
-    { id: 'published', numeric: false, disablePadding: false, label: 'Published' },
-    { id: 'visibility', numeric: false, disablePadding: false, label: 'Visibility' },
+    { id: 'postId', disablePadding: false, label: 'Id' },
+    { id: 'title', disablePadding: false, label: 'Title' },
+    { id: 'slug', disablePadding: false, label: 'Slug' },
+    { id: 'published', disablePadding: false, label: 'Published' },
+    { id: 'visibility', disablePadding: false, label: 'Visibility' },
   ],
   order: 'asc',
   orderBy: 'id',
@@ -36,7 +36,7 @@ export default class Posts extends Component {
             postId: post.id,
             title: post.title,
             slug: post.slug,
-            published: post.published,
+            published: post.published ? 'true' : 'false',
             visibility: post.visibility
           });
         });

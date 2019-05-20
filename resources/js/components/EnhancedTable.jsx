@@ -18,6 +18,7 @@ import {
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
+import { color } from '../theme/Styles';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -72,13 +73,11 @@ class EnhancedTableHead extends React.Component {
             row => (
               <TableCell
                 key={row.id}
-                align={row.numeric ? 'right' : 'left'}
                 padding={row.disablePadding ? 'none' : 'default'}
                 sortDirection={orderBy === row.id ? order : false}
               >
                 <Tooltip
                   title="Sort"
-                  placement={row.numeric ? 'bottom-end' : 'bottom-start'}
                   enterDelay={300}
                 >
                   <TableSortLabel
@@ -304,9 +303,25 @@ class EnhancedTable extends React.Component {
                         padding="checkbox">
                         <Checkbox checked={isSelected} />
                       </TableCell>
-                      {rows[n.id].map((value, key) => (
-                        <TableCell key={key}>{value}</TableCell>
-                      ))}
+                      {rows[n.id].map((value, key) => {
+                        if (value === 'true') {
+                          return (
+                            <TableCell key={key}>
+                              <Icon style={{ color: color.success }}>check_circle</Icon>
+                            </TableCell>
+                          );
+                        } else if (value === 'false') {
+                          return (
+                            <TableCell key={key}>
+                              <Icon style={{ color: color.error }}>remove_circle</Icon>
+                            </TableCell>
+                          );
+                        } else {
+                          return (
+                            <TableCell key={key}>{value}</TableCell>
+                          );
+                        }
+                      })}
                       <TableCell>
                         <Tooltip title={`${tooltipTerm} Settings`}>
                           <IconButton aria-label={`${tooltipTerm} Settings`}>
