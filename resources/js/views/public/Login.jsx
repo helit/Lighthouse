@@ -18,7 +18,7 @@ import api from '../../services/api';
 import TokenUtils from '../../utils/TokenUtils';
 import LoadingButton from '../../components/LoadingButton';
 import styled from 'styled-components';
-import { color, statusBorder } from '../../theme/Styles';
+import { color } from '../../theme/Styles';
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -99,10 +99,7 @@ export default class Login extends Component {
                 style={{
                   maxWidth: '400px',
                   margin: '25px',
-                  padding: '25px',
-                  borderTop: badCredentials
-                    ? statusBorder.error
-                    : statusBorder.primary
+                  padding: '25px'
                 }}>
                 <HeaderWrapper>
                   <Avatar

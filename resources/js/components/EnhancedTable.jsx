@@ -269,7 +269,7 @@ class EnhancedTable extends React.Component {
     const rows = this.createRows(data);
 
     return (
-      <Paper square={true} elevation={4}>
+      <Paper square={true} elevation={1}>
         <EnhancedTableToolbar
           title={title}
           tooltipTerm={tooltipTerm}
