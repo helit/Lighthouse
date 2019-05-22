@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import {
   Table,
   TableBody,
@@ -44,7 +44,17 @@ function getSorting(order, orderBy) {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
-class EnhancedTableHead extends React.Component {
+interface ITableHeadProps {
+  numSelected?: number;
+  order?: any;
+  orderBy?: any;
+  rowCount?: number;
+  onRequestSort?: (event: any, property: any) => any;
+  onSelectAllClick?: any;
+  rows: any[];
+}
+
+class EnhancedTableHead extends React.Component<ITableHeadProps, any> {
   createSortHandler = property => event => {
     this.props.onRequestSort(event, property);
   };
@@ -99,16 +109,7 @@ class EnhancedTableHead extends React.Component {
   }
 }
 
-EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
-
-const toolbarStyles = theme => ({
+const toolbarStyles: any = theme => ({
   root: {
     paddingRight: theme.spacing.unit,
   },
@@ -133,7 +134,7 @@ const toolbarStyles = theme => ({
   },
 });
 
-let EnhancedTableToolbar = props => {
+let EnhancedTableToolbar: any = props => {
   const { numSelected, classes, title, tooltipTerm } = props;
 
   return (
@@ -173,14 +174,9 @@ let EnhancedTableToolbar = props => {
   );
 };
 
-EnhancedTableToolbar.propTypes = {
-  classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
-};
-
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
 
-const styles = theme => ({
+const styles: any = theme => ({
   root: {
     width: '100%',
     marginTop: theme.spacing.unit * 3,
@@ -190,7 +186,7 @@ const styles = theme => ({
   },
 });
 
-class EnhancedTable extends React.Component {
+class EnhancedTable extends React.Component<any, any> {
   state = {
     order: (this.props.data.order)
       ? this.props.data.order
@@ -339,9 +335,5 @@ class EnhancedTable extends React.Component {
     );
   }
 }
-
-EnhancedTable.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(EnhancedTable);

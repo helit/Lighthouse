@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import api from '../../../services/api';
 import EnhancedTable from '../../../components/EnhancedTable';
 import AdminPageLoader from '../../../components/AdminPageLoader';
@@ -17,7 +17,7 @@ let data = {
   data: [],
 }
 
-export default class Pages extends Component {
+export default class Pages extends React.Component<any, any> {
   state = {
     pages: [],
     isLoading: null,

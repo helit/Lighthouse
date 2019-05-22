@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
   CircularProgress
 } from '@material-ui/core';
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   min-height: 200px;
 `;
 
-export default class AdminPageLoader extends Component {
+export default class AdminPageLoader extends React.Component<any, any> {
   render() {
     return (
       <Wrapper>

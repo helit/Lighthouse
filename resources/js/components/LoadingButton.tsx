@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import {
   Button,
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-export default class LoadingButton extends Component {
+export default class LoadingButton extends React.Component<any, any> {
   render() {
     return (
       <Wrapper>

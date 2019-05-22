@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import api from '../../../services/api';
 import {
   Typography,
@@ -19,7 +19,7 @@ let data = {
   data: [],
 }
 
-export default class Users extends Component {
+export default class Users extends React.Component<any, any> {
   state = {
     users: [],
     isLoading: null,

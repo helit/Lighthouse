@@ -1,4 +1,4 @@
-import React, { Component, render } from 'react';
+import * as React from 'react';
 import {
   Drawer,
   List,
@@ -42,7 +42,7 @@ const menu = {
   ],
 }
 
-export default class AdminDrawer extends Component {
+export default class AdminDrawer extends React.Component<any, any> {
   onChangeView = (view) => {
     this.props.renderView(view);
   }

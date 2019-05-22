@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
   Grid,
   Paper,
@@ -32,7 +32,7 @@ const View = styled.div`
   max-width: 1140px;
 `;
 
-export default class Admin extends Component {
+export default class Admin extends React.Component<any, any> {
   state = {
     currentView: <Dashboard />,
     viewTitle: 'Dashboard'

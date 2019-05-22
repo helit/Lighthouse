@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { CircularProgress } from '@material-ui/core';
 
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-export default class PageLoading extends Component {
+export default class PageLoading extends React.Component<any, any> {
   render() {
     return (
       <Wrapper>

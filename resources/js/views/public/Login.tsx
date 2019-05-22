@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
   Grid,
   Paper,
@@ -14,11 +14,11 @@ import {
 } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import api from '../../services/api';
-import TokenUtils from '../../utils/TokenUtils';
 import LoadingButton from '../../components/LoadingButton';
 import styled from 'styled-components';
 import { color } from '../../theme/Styles';
+import userStore from '../../stores/UserStore';
+import { observer } from 'mobx-react';
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -32,66 +32,50 @@ const FooterWrapper = styled.div`
   margin-top: 20px;
 `;
 
-export default class Login extends Component {
+interface IState {
+  email: string;
+  password: string;
+  rememberMe: boolean;
+}
+
+@observer
+export default class Login extends React.Component<any, IState> {
   constructor(props) {
     super(props);
 
     this.state = {
       email: '',
       password: '',
-      isLoading: false,
-      badCredentials: false,
-      isAuthenticated: false,
-      rememberMe: false
+      rememberMe: false,
     };
   }
 
   onInputChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value } as Pick<IState, keyof IState>);
   }
 
-  onCheckboxChange = () => {
-    let checked = !this.state.rememberMe;
-    this.setState({ rememberMe: checked });
+  onCheckboxChange = (e) => {
+    this.setState({ rememberMe: e.target.checked });
   }
 
   onSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = this.state;
-
-    this.setState({
-      isLoading: true,
-      badCredentials: false
-    });
-
-    api.post('/login', { email, password })
-      .then(response => {
-        this.setState({ isAuthenticated: true });
-        TokenUtils.setToken(response.data.token);
-      })
-      .catch(error => {
-        this.setState({ badCredentials: true });
-        // localStorage.removeItem('token');
-        console.log(error);
-        this.setState({ isLoading: false });
-      });
+    const { email, password, rememberMe } = this.state;
+    userStore.login(email, password, rememberMe);
   }
 
   render() {
     const {
       email,
       password,
-      isLoading,
-      badCredentials,
-      isAuthenticated,
-      rememberMe
+      rememberMe,
     } = this.state;
 
     return (
       <div style={{ height: '100vh' }}>
         <Grid container justify="center" alignItems="center">
           <Grid item style={{ marginTop: '50px' }}>
-            {isAuthenticated
+            {userStore.isAuthenticated
               ? <Redirect to='/admin' />
               : <Paper
                 elevation={1}
@@ -105,7 +89,7 @@ export default class Login extends Component {
                   <Avatar
                     style={{
                       color: '#fff',
-                      backgroundColor: badCredentials
+                      backgroundColor: userStore.badCredentials
                         ? color.error
                         : color.primary,
                       marginBottom: '10px',
@@ -161,7 +145,7 @@ export default class Login extends Component {
                       text={'Login'}
                       color={'primary'}
                       type={'submit'}
-                      loading={isLoading}
+                      loading={false}
                       style={{ flex: '1', justifyContent: 'flex-start' }} />
                     <Link to="/reset">
                       <Button>

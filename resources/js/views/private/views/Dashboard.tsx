@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
   Typography
 } from '@material-ui/core';
 
 
-export default class Dashboard extends Component {
+export default class Dashboard extends React.Component<any, any> {
   render() {
     return (
       <div>

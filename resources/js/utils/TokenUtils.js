@@ -7,11 +7,12 @@ export default class TokenUtils {
     return localStorage.getItem('token');
   }
 
-  static getResetToken() {
-    return 'not a reset token';
-  }
-
   static removeToken() {
     localStorage.removeItem('token');
+  }
+
+  static resetToken(token) {
+    this.removeToken();
+    this.setToken(token);
   }
 }

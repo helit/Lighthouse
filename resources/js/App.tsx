@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import PrivateRoute from './navigation/PrivateRoute';
 
@@ -14,9 +14,11 @@ import Login from './views/public/Login';
 import Admin from './views/private/Admin';
 import PageNotFound from './views/public/PageNotFound';
 
+import userStore from './stores/UserStore';
+
 const styles = theme => ({});
 
-class App extends Component {
+class App extends React.Component<any, any> {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
