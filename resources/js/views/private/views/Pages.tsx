@@ -60,14 +60,11 @@ export default class Pages extends React.Component<any, any> {
 
   render() {
     const { isLoading } = this.state;
-    return (
-      <div>
-        {isLoading ? (
-          <AdminPageLoader />
-        ) : (
-          <EnhancedTable title={'Pages'} tooltipTerm={'Page'} data={data} />
-        )}
-      </div>
-    );
+
+    if (isLoading) {
+      return <AdminPageLoader />;
+    }
+
+    return <EnhancedTable title={'Pages'} tooltipTerm={'Page'} data={data} />;
   }
 }

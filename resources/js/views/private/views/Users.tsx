@@ -58,19 +58,18 @@ export default class Users extends React.Component<any, any> {
 
   render() {
     const { isLoading } = this.state;
+
+    if (isLoading) {
+      return <AdminPageLoader />;
+    }
+
     return (
-      <div>
-        {isLoading ? (
-          <AdminPageLoader />
-        ) : (
-          <div>
-            <Typography paragraph variant="body1">
-              List of all users.
-            </Typography>
-            <EnhancedTable title={'Users'} tooltipTerm={'User'} data={data} />
-          </div>
-        )}
-      </div>
+      <React.Fragment>
+        <Typography paragraph variant="body1">
+          List of all users.
+        </Typography>
+        <EnhancedTable title={'Users'} tooltipTerm={'User'} data={data} />
+      </React.Fragment>
     );
   }
 }

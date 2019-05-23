@@ -5,21 +5,6 @@ const api = axios.create({
   baseURL: '/api',
 });
 
-api.interceptors.request.use(
-  config => {
-    const token = userStore.getToken();
-
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    };
-
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);
-
 let refreshingToken = false;
 let refreshPromise: Promise<any> | null = null;
 api.interceptors.response.use(
@@ -43,7 +28,6 @@ api.interceptors.response.use(
           .post('/refresh')
           .then(response => {
             const newToken = response.data.token;
-            console.log('/refresh response: ', response.data);
 
             localStorage.setItem('token', newToken);
             setToken(newToken);
@@ -54,7 +38,6 @@ api.interceptors.response.use(
             return axios(originalRequest);
           })
           .catch(refreshError => {
-            console.log('/refresh error: ', refreshError)
             if (
               refreshError.response.status === 401 ||
               refreshError.response.status === 500

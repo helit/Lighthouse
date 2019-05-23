@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 200px;
+  flex: 1;
 `;
 
 export default class AdminPageLoader extends React.Component<any, any> {

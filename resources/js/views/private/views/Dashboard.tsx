@@ -7,7 +7,7 @@ import {
 export default class Dashboard extends React.Component<any, any> {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Typography variant="h5" style={{ marginBottom: '20px' }}>
           Subtitle
         </Typography>
@@ -23,7 +23,7 @@ export default class Dashboard extends React.Component<any, any> {
           arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
           donec massa sapien faucibus et molestie ac.
         </Typography>
-      </div>
+      </React.Fragment>
     );
   }
 }

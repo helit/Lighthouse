@@ -60,14 +60,11 @@ export default class Posts extends React.Component<any, any> {
 
   render() {
     const { isLoading } = this.state;
-    return (
-      <div>
-        {isLoading ? (
-          <AdminPageLoader />
-        ) : (
-          <EnhancedTable title={'Posts'} tooltipTerm={'Post'} data={data} />
-        )}
-      </div>
-    );
+
+    if (isLoading) {
+      return <AdminPageLoader />;
+    }
+
+    return <EnhancedTable title={'Posts'} tooltipTerm={'Post'} data={data} />;
   }
 }

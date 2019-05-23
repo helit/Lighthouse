@@ -58,6 +58,12 @@ export default class AdminDropdown extends React.Component<any, IState> {
           onClose={this.handleClose}
         >
           <MenuItem
+            component={(props: any) => <NavLink to="/" {...props} />}
+            onClick={this.handleClose}
+          >
+            View Page
+          </MenuItem>
+          <MenuItem
             component={(props: any) => <NavLink to="/logout" {...props} />}
             onClick={this.handleClose}
           >

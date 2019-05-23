@@ -30,6 +30,9 @@ const View = styled.div`
   padding-top: 24px;
   padding-bottom: 24px;
   max-width: 1140px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export default class Admin extends React.Component<any, any> {
