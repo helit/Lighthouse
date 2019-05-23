@@ -15,12 +15,16 @@ export class UserStore {
 
   @action
   setUser(data): void {
-    this.user = User.create({
-      id: data.id,
-      name: data.name,
-      email: data.email,
-      role: data.role
-    });
+    if (data === null) {
+      this.user = null;
+    } else {
+      this.user = User.create({
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        role: data.role
+      });
+    }
   }
 
   @action
@@ -64,7 +68,6 @@ export class UserStore {
     return new Promise(resolve => {
       api.post('/logout')
         .then(() => {
-          console.log('logout');
           this.setUser(null);
           localStorage.removeItem('token');
           resolve();

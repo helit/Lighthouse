@@ -11,10 +11,9 @@ import { theme } from './theme/Styles';
 
 import Home from './views/public/Home';
 import Login from './views/public/Login';
+import Logout from './views/public/Logout';
 import Admin from './views/private/Admin';
 import PageNotFound from './views/public/PageNotFound';
-
-import userStore from './stores/UserStore';
 
 const styles = theme => ({});
 
@@ -26,6 +25,7 @@ class App extends React.Component<any, any> {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
+            <Route path="/logout" component={Logout} />
             <PrivateRoute path="/admin" component={Admin} />
             <Route component={PageNotFound} />
           </Switch>
