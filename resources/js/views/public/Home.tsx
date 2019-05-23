@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
   Grid,
   Typography,
 } from '@material-ui/core';
 import Nav from '../../components/Nav';
 
-export default class Home extends Component {
+export default class Home extends React.Component<any, any> {
   render() {
     return (
       <div>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
   AppBar,
   Toolbar,
@@ -9,7 +9,7 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
 `;
 
-export default class Nav extends Component {
+export default class Nav extends React.Component<any, any> {
   render() {
     return (
       <Wrapper>

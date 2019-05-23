@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import api from '../../../services/api';
 import EnhancedTable from '../../../components/EnhancedTable';
 import AdminPageLoader from '../../../components/AdminPageLoader';
 
 let data = {
   rows: [
-    { id: 'postId', numeric: false, disablePadding: false, label: 'Id' },
-    { id: 'title', numeric: false, disablePadding: false, label: 'Title' },
-    { id: 'slug', numeric: false, disablePadding: false, label: 'Slug' },
-    { id: 'published', numeric: false, disablePadding: false, label: 'Published' },
-    { id: 'visibility', numeric: false, disablePadding: false, label: 'Visibility' },
+    { id: 'postId', disablePadding: false, label: 'Id' },
+    { id: 'title', disablePadding: false, label: 'Title' },
+    { id: 'slug', disablePadding: false, label: 'Slug' },
+    { id: 'published', disablePadding: false, label: 'Published' },
+    { id: 'visibility', disablePadding: false, label: 'Visibility' },
   ],
   order: 'asc',
   orderBy: 'id',
@@ -17,7 +17,7 @@ let data = {
   data: [],
 }
 
-export default class Posts extends Component {
+export default class Posts extends React.Component<any, any> {
   state = {
     posts: [],
     isLoading: null,
@@ -36,7 +36,7 @@ export default class Posts extends Component {
             postId: post.id,
             title: post.title,
             slug: post.slug,
-            published: post.published,
+            published: post.published ? 'true' : 'false',
             visibility: post.visibility
           });
         });
@@ -60,14 +60,11 @@ export default class Posts extends Component {
 
   render() {
     const { isLoading } = this.state;
-    return (
-      <div>
-        {isLoading ? (
-          <AdminPageLoader />
-        ) : (
-          <EnhancedTable title={'Posts'} tooltipTerm={'Post'} data={data} />
-        )}
-      </div>
-    );
+
+    if (isLoading) {
+      return <AdminPageLoader />;
+    }
+
+    return <EnhancedTable title={'Posts'} tooltipTerm={'Post'} data={data} />;
   }
 }

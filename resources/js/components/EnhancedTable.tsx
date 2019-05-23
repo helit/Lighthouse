@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import {
   Table,
   TableBody,
@@ -18,6 +18,7 @@ import {
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
+import { color } from '../theme/Styles';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -43,7 +44,17 @@ function getSorting(order, orderBy) {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
-class EnhancedTableHead extends React.Component {
+interface ITableHeadProps {
+  numSelected?: number;
+  order?: any;
+  orderBy?: any;
+  rowCount?: number;
+  onRequestSort?: (event: any, property: any) => any;
+  onSelectAllClick?: any;
+  rows: any[];
+}
+
+class EnhancedTableHead extends React.Component<ITableHeadProps, any> {
   createSortHandler = property => event => {
     this.props.onRequestSort(event, property);
   };
@@ -72,13 +83,11 @@ class EnhancedTableHead extends React.Component {
             row => (
               <TableCell
                 key={row.id}
-                align={row.numeric ? 'right' : 'left'}
                 padding={row.disablePadding ? 'none' : 'default'}
                 sortDirection={orderBy === row.id ? order : false}
               >
                 <Tooltip
                   title="Sort"
-                  placement={row.numeric ? 'bottom-end' : 'bottom-start'}
                   enterDelay={300}
                 >
                   <TableSortLabel
@@ -100,16 +109,7 @@ class EnhancedTableHead extends React.Component {
   }
 }
 
-EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
-
-const toolbarStyles = theme => ({
+const toolbarStyles: any = theme => ({
   root: {
     paddingRight: theme.spacing.unit,
   },
@@ -134,7 +134,7 @@ const toolbarStyles = theme => ({
   },
 });
 
-let EnhancedTableToolbar = props => {
+let EnhancedTableToolbar: any = props => {
   const { numSelected, classes, title, tooltipTerm } = props;
 
   return (
@@ -174,14 +174,9 @@ let EnhancedTableToolbar = props => {
   );
 };
 
-EnhancedTableToolbar.propTypes = {
-  classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
-};
-
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
 
-const styles = theme => ({
+const styles: any = theme => ({
   root: {
     width: '100%',
     marginTop: theme.spacing.unit * 3,
@@ -191,7 +186,7 @@ const styles = theme => ({
   },
 });
 
-class EnhancedTable extends React.Component {
+class EnhancedTable extends React.Component<any, any> {
   state = {
     order: (this.props.data.order)
       ? this.props.data.order
@@ -270,7 +265,7 @@ class EnhancedTable extends React.Component {
     const rows = this.createRows(data);
 
     return (
-      <Paper square={true} elevation={4}>
+      <Paper square={true} elevation={1}>
         <EnhancedTableToolbar
           title={title}
           tooltipTerm={tooltipTerm}
@@ -304,9 +299,25 @@ class EnhancedTable extends React.Component {
                         padding="checkbox">
                         <Checkbox checked={isSelected} />
                       </TableCell>
-                      {rows[n.id].map((value, key) => (
-                        <TableCell key={key}>{value}</TableCell>
-                      ))}
+                      {rows[n.id].map((value, key) => {
+                        if (value === 'true') {
+                          return (
+                            <TableCell key={key}>
+                              <Icon style={{ color: color.success }}>check_circle</Icon>
+                            </TableCell>
+                          );
+                        } else if (value === 'false') {
+                          return (
+                            <TableCell key={key}>
+                              <Icon style={{ color: color.error }}>remove_circle</Icon>
+                            </TableCell>
+                          );
+                        } else {
+                          return (
+                            <TableCell key={key}>{value}</TableCell>
+                          );
+                        }
+                      })}
                       <TableCell>
                         <Tooltip title={`${tooltipTerm} Settings`}>
                           <IconButton aria-label={`${tooltipTerm} Settings`}>
@@ -324,9 +335,5 @@ class EnhancedTable extends React.Component {
     );
   }
 }
-
-EnhancedTable.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(EnhancedTable);

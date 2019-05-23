@@ -4,30 +4,33 @@ import {
 import {
   indigo,
   pink,
-  red
+  red,
+  green
 } from '@material-ui/core/colors';
 
 export const theme = createMuiTheme({
   palette: {
     primary: {
-      main: indigo[500]
+      main: indigo[500],
     },
     secondary: {
-      main: pink[500]
+      main: pink[500],
     },
-    type: 'light'
+    type: 'light',
   },
   status: {
-    danger: red[400]
+    danger: red[400],
+    success: green[600],
   },
   typography: {
     useNextVariants: true,
-  }
+  },
 });
 
 export const color = {
   primary: `${theme.palette.primary.main}`,
   error: `${theme.status.danger}`,
+  success: `${theme.status.success}`,
   dark: '#424242',
   black: '#19171c',
   darkGrey: '#3f4448',

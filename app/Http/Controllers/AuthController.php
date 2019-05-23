@@ -16,7 +16,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'refresh']]);
     }
 
     /**
@@ -29,6 +29,14 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
+
+        // if ($request->input('rememberMe')) {
+        //     putenv("JWT_TTL=" . 1);
+        //     putenv("JWT_REFRESH_TTL=" . 10080);
+        // } else {
+        //     putenv("JWT_TTL=" . 15);
+        //     putenv("JWT_REFRESH_TTL=" . 1);
+        // }
 
         if (!$token = $this->guard()->attempt($credentials)) {
             return response()->json(['error' => 'Incorrect email/password'], 401);

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
   AppBar,
   Toolbar,
@@ -17,7 +17,7 @@ const AdminAppBar = withStyles({
   }
 })(AppBar);
 
-export default class AdminToolbar extends Component {
+export default class AdminToolbar extends React.Component<any, any> {
   render() {
     return (
       <AdminAppBar
@@ -26,7 +26,7 @@ export default class AdminToolbar extends Component {
         <Toolbar
           variant="dense">
           <Typography
-            style={{ flexGrow: "1" }}
+            style={{ flexGrow: 1 }}
             variant="h6"
             color="inherit">
             Admin
